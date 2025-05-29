@@ -126,10 +126,121 @@ Your file structure after running the setup module and installing cellbender sho
 ### Part 2: Preprocess your data 
 The scripts used assume that your raw data has the following structure: 
 
+```bash
+/home/mfafouti/nearline/rrg-shreejoy/SlideTagData
+└── GOY29355.20241128
+    ├── BC13
+    │   ├── cDNA
+    │   │   ├── ST_BC13_cDNA_lib_S8_L006_I1_001.fastq.gz
+    │   │   ├── ST_BC13_cDNA_lib_S8_L006_I2_001.fastq.gz
+    │   │   ├── ST_BC13_cDNA_lib_S8_L006_R1_001.fastq.gz
+    │   │   └── ST_BC13_cDNA_lib_S8_L006_R2_001.fastq.gz
+    │   └── SP
+    │       ├── ST_BC13_SP_lib_S2_L005_I1_001.fastq.gz
+    │       ├── ST_BC13_SP_lib_S2_L005_I2_001.fastq.gz
+    │       ├── ST_BC13_SP_lib_S2_L005_R1_001.fastq.gz
+    │       └── ST_BC13_SP_lib_S2_L005_R2_001.fastq.gz
+    ├── BC14
+    │   ├── cDNA
+    │   │   ├── ST_BC14_cDNA_lib_S9_L006_I1_001.fastq.gz
+    │   │   ├── ST_BC14_cDNA_lib_S9_L006_I2_001.fastq.gz
+    │   │   ├── ST_BC14_cDNA_lib_S9_L006_R1_001.fastq.gz
+    │   │   └── ST_BC14_cDNA_lib_S9_L006_R2_001.fastq.gz
+    │   └── SP
+    │       ├── ST_BC14_SP_lib_S3_L005_I1_001.fastq.gz
+    │       ├── ST_BC14_SP_lib_S3_L005_I2_001.fastq.gz
+    │       ├── ST_BC14_SP_lib_S3_L005_R1_001.fastq.gz
+    │       └── ST_BC14_SP_lib_S3_L005_R2_001.fastq.gz
+```
+*Note*: Make sure that the .fastq files are merged. 
+
 After running the scripts for at 1 sample, 3 new folders will be created: 
 ```bash
-#TODO add tree
+├── output_folder
+│   ├── CB_out
+│   ├── CR_out
+│   └── CT_out
 ```
+The contents of the `CR_out` folder (after running 1 sample), containing the output of CellRanger, should look like: 
+
+```bash
+/home/mfafouti/scratch/Mommybrain_marlen/Slide_tags/SlideTagDataPipeline/Manual_processing/CR_out
+└── BC13
+    ├── BC13_20250404_110829
+    │   ├── BC13_20250404_110829.mri.tgz
+    │   ├── _cmdline
+    │   ├── extras
+    │   ├── _filelist
+    │   ├── _finalstate
+    │   ├── _invocation
+    │   ├── _jobmode
+    │   ├── _log
+    │   ├── _mrosource
+    │   ├── outs
+    │   ├── _perf
+    │   ├── _perf._truncated_
+    │   ├── SC_RNA_COUNTER_CS
+    │   ├── _sitecheck
+    │   ├── _tags
+    │   ├── _timestamp
+    │   ├── _uuid
+    │   ├── _vdrkill
+    │   └── _versions
+    ├── cellranger_BC13_42143780.err
+    ├── cellranger_BC13_42143780.log
+    └── sbatch_cellranger_BC13.slurm
+
+6 directories, 19 files
+```
+The contents of the `CB_out` folder (after running 1 sample), containing the output of CellBender, should look like: 
+```bash 
+/home/mfafouti/scratch/Mommybrain_marlen/Slide_tags/SlideTagDataPipeline/Manual_processing/CB_out
+└── BC13
+    ├── cellbender_42392333.log
+    ├── cellbender_BC13.log
+    ├── output_file_cell_barcodes.csv
+    ├── output_file_filtered.h5
+    ├── output_file.h5
+    ├── output_file.log
+    ├── output_file_metrics.csv
+    ├── output_file.pdf
+    ├── output_file_posterior.h5
+    ├── output_file_report.html
+    ├── sbatch_cellbender_BC13.slurm
+    └── sc_out
+        ├── barcodes.tsv.gz
+        ├── features.tsv.gz
+        └── matrix.mtx.gz
+
+3 directories, 14 files
+```
+*Note*: The sc_out folder is created through the `extract_sc_out.py` script. 
+
+The contents of the `CT_out` folder (after running 1 sample), containing the output of CurioTrekker, should look like: 
+
+```bash 
+/home/mfafouti/scratch/Mommybrain_marlen/Slide_tags/SlideTagDataPipeline/Manual_processing/CT_out
+├── ct_BC13ct_BC13_43089914.err
+├── ct_BC13ct_BC13_43089914.out
+├── log
+│   └── BC13
+│       ├── analysis.log
+│       ├── beadbarcode_splitter.log
+│       ├── bead_matching.log
+│       ├── fastq_parser.log
+│       ├── genmetrics.log
+│       ├── genreport.log
+│       ├── mismatch_analysis.log
+│       └── spatial.log
+├── ST_BC13_SP_lib_S2_L005_R1_001.fastq.gz
+├── ST_BC13_SP_lib_S2_L005_R2_001.fastq.gz
+├── withBenderSamplesheet_BC13_samplesheet_trekker.csv
+└── withBendersbatch_curiotrekker_BC13.slurm
+
+3 directories, 16 files
+```
+
+*Note*: The .fastq files in this folder correspond to the 1 sample that went through CurioTrekker. The corresponding container might not have access to other shared locations on an HPC where the data is usually stored. This means that the user needs to transfer the data to their working directory (in our case, in some location within $SCRATCH in SciNet's Niagara)
 
 
 *credits to @hudsonhu22 for streamlining this whole process*
