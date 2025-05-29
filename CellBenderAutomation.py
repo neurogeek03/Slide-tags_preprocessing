@@ -46,29 +46,29 @@ for sample in sample_list:
     # ========== CREATING SBATCH SCRIPT, CELL BENDER COMMAND IS INCLUDED HERE ========== 
     # SLURM job script for sbatch submission with email notifications
     sbatch_script = f"""#!/bin/bash
-#SBATCH --job-name=cellbender_gpu_{sample}   # Name of your job
-#SBATCH --account=def-shreejoy                # Compute Canada account
-#SBATCH --time=03:00:00                        # Job time (HH:MM:SS)
-#SBATCH --nodes=1                              # Number of nodes
-#SBATCH --ntasks=1                             # Number of tasks
-#SBATCH --gres=gpu:1                           # Request 1 GPU
-#SBATCH --cpus-per-task=4                      # Request 4 CPU cores per task
-#SBATCH --mem=128G                              # Request 64 GB of memory
-#SBATCH --output={os.path.join(sample_output, 'cellbender_%j.log')}
-#SBATCH --mail-user={email}                    
-#SBATCH --mail-type=BEGIN,END,FAIL             
-
-# Load the Apptainer module
-module load StdEnv/2023                     # Load default environment
-module load apptainer/1.3.4                    # Adjust version if needed
-
-# Run Cell Bender
-apptainer exec --nv {CONTAINER_PATH} cellbender remove-background \\
-    --input {sample_fastq} \\
-    --output {os.path.join(sample_output, 'output_file.h5')} \\
-    --cuda \\
-    --epochs 150
-"""
+        #SBATCH --job-name=cellbender_gpu_{sample}   # Name of your job
+        #SBATCH --account=def-shreejoy                # Compute Canada account
+        #SBATCH --time=03:00:00                        # Job time (HH:MM:SS)
+        #SBATCH --nodes=1                              # Number of nodes
+        #SBATCH --ntasks=1                             # Number of tasks
+        #SBATCH --gres=gpu:1                           # Request 1 GPU
+        #SBATCH --cpus-per-task=4                      # Request 4 CPU cores per task
+        #SBATCH --mem=128G                              # Request 64 GB of memory
+        #SBATCH --output={os.path.join(sample_output, 'cellbender_%j.log')}
+        #SBATCH --mail-user={email}                    
+        #SBATCH --mail-type=BEGIN,END,FAIL             
+        
+        # Load the Apptainer module
+        module load StdEnv/2023                     # Load default environment
+        module load apptainer/1.3.4                    # Adjust version if needed
+        
+        # Run Cell Bender
+        apptainer exec --nv {CONTAINER_PATH} cellbender remove-background \\
+            --input {sample_fastq} \\
+            --output {os.path.join(sample_output, 'output_file.h5')} \\
+            --cuda \\
+            --epochs 150
+        """
 
     # Write the SLURM script to a file
     sbatch_script_path = os.path.join(sample_output, f"sbatch_cellbender_{sample}.slurm")
