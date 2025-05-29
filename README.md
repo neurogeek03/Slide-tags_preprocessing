@@ -18,7 +18,7 @@ graph LR
 ## Structure
 
 - `CellRangerAutomation.py`: Script to run CellRanger, offered by 10x Genomics. Submits an sbatch script to a SLURM HPC.  
-- `CellBenderAutomation.py`: Script to run CellBender , offered by 10x Genomics. Submits an sbatch script to a SLURM HPC. 
+- `CellBenderAutomation.py`: Script to run CellBender. Submits an sbatch script to a SLURM HPC. 
 - `CurioTrekkerAutomate.py`: Script to run the CurioTrekker pipeline offered by Curio BioScience. Submits an sbatch script to a SLURM HPC. 
 
 ## Running the Analysis
