@@ -17,7 +17,7 @@ import numpy as np
 email = "mariaeleni.fafouti@mail.utoronto.ca"
 cb_path = "/home/mfafouti/scratch/Mommybrain_marlen/Slide_tags/SlideTagDataPipeline/Manual_processing/CB_out"
 cr_path = "/home/mfafouti/scratch/Mommybrain_marlen/Slide_tags/SlideTagDataPipeline/Manual_processing/CR_out"
-fastq_path = "/home/mfafouti/nearline/rrg-shreejoy/SlideTagData/GOY29355.20241128"
+fastq_path = "/home/mfafouti/nearline/rrg-shreejoy/SlideTagData/GOY29355.20241128" # note: container might require files to be in local folder
 tile_folder = "/home/mfafouti/scratch/Mommybrain_marlen/Slide_tags/SlideTagDataPipeline/Manual_processing/tiles"
 sample_output = "/home/mfafouti/scratch/Mommybrain_marlen/Slide_tags/SlideTagDataPipeline/Manual_processing/CT_out"
 
