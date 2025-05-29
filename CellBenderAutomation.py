@@ -1,6 +1,6 @@
 """
 Title:        Cell Bender Automation
-Description:  Running Cell Bender for 1 or multiple sample: from reading fastq files, all the way into submitting the cellranger process as a job on a SLURM HPC cluster. 
+Description:  Running Cell Bender for 1 or multiple samples: from reading fastq files, all the way into submitting the cellranger process as a job on a SLURM HPC cluster. 
 Author:       Hugo Hudson
 Date:         15-04-2025
 """
